@@ -1,8 +1,8 @@
 {
-  "name": "exodus4d/pathfinder",
+  "name": "goryn-clade/pathfinder",
   "description": "Mapping tool for EVE ONLINE",
   "type": "project",
-  "homepage": "https://github.com/exodus4d/pathfinder",
+  "homepage": "https://github.com/goryn-clade/pathfinder",
   "minimum-stability": "stable",
   "license": "MIT",
   "authors": [
@@ -51,7 +51,7 @@
     "react/socket": "1.3.*",
     "react/promise-stream": "1.2.*",
     "clue/ndjson-react": "1.1.*",
-    "exodus4d/pathfinder_esi": "dev-develop as 0.0.x-dev"
+    "goryn-clade/pathfinder_esi": "dev-develop as 0.0.x-dev"
   },
   "suggest": {
     "ext-redis": "Redis can be used as cache backend."

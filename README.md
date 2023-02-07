@@ -8,7 +8,7 @@ This Pathfinder Fork is an attempt to make a community supported fork in the abs
 
 If you wish to contribute please join the [Pathfinder Slack](https://join.slack.com/t/pathfinder-eve-online/shared_invite/enQtMzMyOTkyMjczMTA3LWI2NGE1OTY5ODBmNDZlMDY3MDIzYjk5ZTljM2JjZjIwNDRkNzMyMTEwMDUzOGQwM2E3ZjE1NGEwNThlMzYzY2Y).
 
-- Project URL [https://www.pathfinder-w.space](https://www.pathfinder-w.space)
+- Project URL [https://www.pathfinder-w.space](https://www.pathfinder-w.space) (DEAD - TODO: Replace?)
 - Screenshots [imgur.com](http://imgur.com/a/k2aVa)
 - Videos [youtube.com](https://www.youtube.com/channel/UC7HU7XEoMbqRwqxDTbMjSPg)
 - Licence [MIT](http://opensource.org/licenses/MIT)
@@ -17,10 +17,9 @@ If you wish to contribute please join the [Pathfinder Slack](https://join.slack.
 - Developer [Slack](https://slack.com) chat:
   - https://pathfinder-eve-online.slack.com
   - Join channel [pathfinder-eve-online.slack.com](https://join.slack.com/t/pathfinder-eve-online/shared_invite/enQtMzMyOTkyMjczMTA3LWI2NGE1OTY5ODBmNDZlMDY3MDIzYjk5ZTljM2JjZjIwNDRkNzMyMTEwMDUzOGQwM2E3ZjE1NGEwNThlMzYzY2Y)
-  - Can´t join? pathfinder@exodus4d.de
 
 **Feel free to check the code for bugs and security issues.
-Issues should be reported in the [Issue](https://github.com/exodus4d/pathfinder/issues) section.**
+Issues should be reported in the [Issue](https://github.com/goryn-clade/pathfinder/issues) section.**
 
 ***
 
