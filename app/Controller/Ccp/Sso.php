@@ -19,6 +19,7 @@ use Exodus4D\Pathfinder\Model\Pathfinder;
 use Exodus4D\Pathfinder\Lib;
 use Firebase\JWT\JWT;
 use Firebase\JWT\JWK;
+use Firebase\JWT\Key;
 
 class Sso extends Api\User{
 
@@ -461,7 +462,7 @@ class Sso extends Api\User{
         // map list of algs from CCP JWK 
         $supportedAlgs = array_column($ccpJwks['keys'], 'alg');
         // get decoded JWT using ccp supplied JWK
-        $decodedJwt = JWT::decode($accessToken, JWK::parseKeySet($ccpJwks), $supportedAlgs);
+        $decodedJwt = JWT::decode($accessToken, new Key(JWK::parseKeySet($ccpJwks), $supportedAlgs));
         // check if issuer matches correct ccp supplied claim values
         if (strpos($decodedJwt->iss, $this->getSsoJwkClaim()) !== true) {            
             self::getSSOLogger()->write(sprintf(self::ERROR_TOKEN_VERIFICATION, __METHOD__));
