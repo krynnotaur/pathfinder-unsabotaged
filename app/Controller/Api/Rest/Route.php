@@ -14,7 +14,14 @@ class Route extends AbstractRestController {
     /**
      * cache key for current Thera connections from eve-scout.com
      */
-    const CACHE_KEY_THERA_JUMP_DATA = 'CACHED_THERA_JUMP_DATA';
+    const CACHE_KEY_THERA_JUMP_DATA     = 'CACHED_THERA_JUMP_DATA';
+    const CACHE_KEY_TURNUR_JUMP_DATA    = 'CACHED_TURNUR_JUMP_DATA';
+
+    /**
+     * ids for hub systems
+     */
+    const THERA_ID  = '31000005';
+    const TURNUR_ID = '30002086';
 
     /**
      * route search depth
@@ -259,8 +266,10 @@ class Route extends AbstractRestController {
      * set current Thera connections jump data for this instance
      * -> Connected wormholes pulled from eve-scout.com
      */
-    private function setTheraJumpData(){
-        if(!$this->getF3()->exists(self::CACHE_KEY_THERA_JUMP_DATA, $jumpData)){
+    private function setEveScoutJumpData(int $system_id){
+        $cache_key = $system_id == self::THERA_ID ? self::CACHE_KEY_THERA_JUMP_DATA : self::CACHE_KEY_TURNUR_JUMP_DATA;
+
+        if(!$this->getF3()->exists($cache_key, $jumpData)){
             $jumpData = [];
             $connectionsData = $this->getF3()->eveScoutClient()->send('getTheraConnections');
 
@@ -272,34 +281,39 @@ class Route extends AbstractRestController {
                  * @param string $systemTargetKey
                  */
                 $enrichJumpData = function(array &$row, string $systemSourceKey, string $systemTargetKey) use (&$jumpData) {
-                    // check if response data is valid
+                    // check if response data is valid                 
                     if(
-                        is_object($systemSource = $row[$systemSourceKey]) && !empty((array)$systemSource) &&
-                        is_object($systemTarget = $row[$systemTargetKey]) && !empty((array)$systemTarget)
+                        !empty((array)$systemSource = $row[$systemSourceKey]) &&
+                        !empty((array)$systemTarget = $row[$systemTargetKey])
                     ){
+                        $universe = new Universe();
+                        $staticData = $universe->getSystemData($systemSource['id']);
+
                         if(!array_key_exists($systemSource->id, $jumpData)){
-                            $jumpData[$systemSource->id] = [
-                                'systemId'          => (int)$systemSource->id,
-                                'systemName'        => $systemSource->name,
-                                'constellationId'   => (int)$systemSource->constellationID,
-                                'regionId'          => (int)$systemSource->regionId,
-                                'trueSec'           => $systemSource->security,
+                            $jumpData[$systemSource['id']] = [
+                                'systemId'          => (int)$systemSource['id'],
+                                'systemName'        => (string)$staticData->name,
+                                'constellationId'   => (int)$staticData->constellation->id,
+                                'regionId'          => (int)$staticData->constellation->region->id,
+                                'trueSec'           => round((float)$staticData->trueSec, 4),
                             ];
                         }
 
-                        if( !in_array((int)$systemTarget->id, (array)$jumpData[$systemSource->id]['jumpNodes']) ){
-                            $jumpData[$systemSource->id]['jumpNodes'][] = (int)$systemTarget->id;
+                        if( !in_array((int)$systemTarget['id'], (array)$jumpData[$systemSource['id']]['jumpNodes']) ){
+                            $jumpData[$systemSource['id']]['jumpNodes'][] = (int)$systemTarget['id'];
                         }
                     }
                 };
 
                 foreach((array)$connectionsData['connections'] as $connectionData){
-                    $enrichJumpData($connectionData, 'source', 'target');
-                    $enrichJumpData($connectionData, 'target', 'source');
+                    if($connectionData['source']['id'] == $system_id) {
+                        $enrichJumpData($connectionData, 'source', 'target');
+                        $enrichJumpData($connectionData, 'target', 'source');
+                    }
                 }
 
                 if(!empty($jumpData)){
-                    $this->getF3()->set(self::CACHE_KEY_THERA_JUMP_DATA, $jumpData, $this->theraJumpDataCacheTime);
+                    $this->getF3()->set($cache_key, $jumpData, $this->theraJumpDataCacheTime);
                 }
             }
         }
@@ -538,7 +552,11 @@ class Route extends AbstractRestController {
 
             // add current Thera connections data
             if($filterData['wormholesThera']){
-                $this->setTheraJumpData();
+                $this->setEveScoutJumpData(self::THERA_ID);
+            }
+            // add current Turnur connections data
+            if($filterData['wormholesTurnur']){
+                $this->setEveScoutJumpData(self::TURNUR_ID);
             }
 
             // filter jump data (e.g. remove some systems (0.0, LS)
@@ -625,8 +643,13 @@ class Route extends AbstractRestController {
 
             // add current Thera connections data
             if($filterData['wormholesThera']){
-                $this->setTheraJumpData();
+                $this->setEveScoutJumpData(self::THERA_ID);
             }
+            // add current Turnur connections data
+            if($filterData['wormholesTurnur']){
+                $this->setEveScoutJumpData(self::TURNUR_ID);
+            }
+
 
             // filter jump data (e.g. remove some systems (0.0, LS)
             // --> don´t filter some systems (e.g. systemFrom, systemTo) even if they are are WH,LS,0.0
@@ -808,6 +831,7 @@ class Route extends AbstractRestController {
                     'wormholesCritical'     => (bool) $routeData['wormholesCritical'],
                     'wormholesEOL'          => (bool) $routeData['wormholesEOL'],
                     'wormholesThera'        => (bool) $routeData['wormholesThera'],
+                    'wormholesTurnur'       => (bool) $routeData['wormholesTurnur'],
                     'wormholesSizeMin'      => (string) $routeData['wormholesSizeMin'],
                     'excludeTypes'          => (array) $routeData['excludeTypes'],
                     'endpointsBubble'       => (bool) $routeData['endpointsBubble'],

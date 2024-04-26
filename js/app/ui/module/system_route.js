@@ -508,6 +508,7 @@ define([
                 wormholesCritical:  (rowData.hasOwnProperty('wormholesCritical'))   ? rowData.wormholesCritical | 0 : routeSettings.wormholesCritical,
                 wormholesEOL:       (rowData.hasOwnProperty('wormholesEOL'))        ? rowData.wormholesEOL      | 0 : routeSettings.wormholesEOL,
                 wormholesThera:     (rowData.hasOwnProperty('wormholesThera'))      ? rowData.wormholesThera    | 0 : routeSettings.wormholesThera,
+                wormholesTurnur:     (rowData.hasOwnProperty('wormholesTurnur'))    ? rowData.wormholesTurnur   | 0 : routeSettings.wormholesTurnur,
                 wormholesSizeMin:   (rowData.hasOwnProperty('wormholesSizeMin'))    ? rowData.wormholesSizeMin      : routeSettings.wormholesSizeMin,
                 excludeTypes:       (rowData.hasOwnProperty('excludeTypes'))        ? rowData.excludeTypes          : routeSettings.excludeTypes,
                 endpointsBubble:    (rowData.hasOwnProperty('endpointsBubble'))     ? rowData.endpointsBubble   | 0 : routeSettings.endpointsBubble,
@@ -685,6 +686,7 @@ define([
                 wormholesCritical: routeData.wormholesCritical,
                 wormholesEOL: routeData.wormholesEOL,
                 wormholesThera: routeData.wormholesThera,
+                wormholesTurnur: routeData.wormholesTurnur,
                 wormholesSizeMin: routeData.wormholesSizeMin,
                 excludeTypes: routeData.excludeTypes,
                 endpointsBubble: routeData.endpointsBubble,
@@ -965,6 +967,7 @@ define([
                                             wormholesCritical: routeSettingsData.hasOwnProperty('wormholesCritical') ? parseInt(routeSettingsData.wormholesCritical) : 0,
                                             wormholesEOL: routeSettingsData.hasOwnProperty('wormholesEOL') ? parseInt(routeSettingsData.wormholesEOL) : 0,
                                             wormholesThera: routeSettingsData.hasOwnProperty('wormholesThera') ? parseInt(routeSettingsData.wormholesThera) : 0,
+                                            wormholesTurnur: routeSettingsData.hasOwnProperty('wormholesTurnur') ? parseInt(routeSettingsData.wormholesTurnur) : 0,
                                             wormholesSizeMin: routeSettingsData.wormholesSizeMin || '',
                                             excludeTypes: SystemRouteModule.getLowerSizeConnectionTypes(routeSettingsData.wormholesSizeMin),
                                             endpointsBubble: routeSettingsData.hasOwnProperty('endpointsBubble') ? parseInt(routeSettingsData.endpointsBubble) : 0,
@@ -1087,6 +1090,7 @@ define([
                                             wormholesCritical: routeDialogData.hasOwnProperty('wormholesCritical') ? parseInt(routeDialogData.wormholesCritical) : 0,
                                             wormholesEOL: routeDialogData.hasOwnProperty('wormholesEOL') ? parseInt(routeDialogData.wormholesEOL) : 0,
                                             wormholesThera: routeDialogData.hasOwnProperty('wormholesThera') ? parseInt(routeDialogData.wormholesThera) : 0,
+                                            wormholesTurnur: routeDialogData.hasOwnProperty('wormholesTurnur') ? parseInt(routeDialogData.wormholesTurnur) : 0,
                                             wormholesSizeMin: routeDialogData.wormholesSizeMin || '',
                                             excludeTypes: SystemRouteModule.getLowerSizeConnectionTypes(routeDialogData.wormholesSizeMin),
                                             endpointsBubble: routeDialogData.hasOwnProperty('endpointsBubble') ? parseInt(routeDialogData.endpointsBubble) : 0,
@@ -1137,6 +1141,7 @@ define([
             let wormholeCriticalCheckbox    = routeDialog.find('input[type="checkbox"][name="wormholesCritical"]');
             let wormholeEolCheckbox         = routeDialog.find('input[type="checkbox"][name="wormholesEOL"]');
             let wormholeTheraCheckbox       = routeDialog.find('input[type="checkbox"][name="wormholesThera"]');
+            let wormholeTurnurCheckbox      = routeDialog.find('input[type="checkbox"][name="wormholesTurnur"]');
             let wormholeSizeSelect          = routeDialog.find('#' + this._config.routeDialogSizeSelectId);
 
             // store current "checked" state for each box ---------------------------------------------
