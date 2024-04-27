@@ -15,6 +15,7 @@ define([
     'module/system_intel',
     'module/system_killboard',
     'module/global_thera',
+    'module/global_turnur',
     'module/connection_info',
     'app/counter'
 ], (

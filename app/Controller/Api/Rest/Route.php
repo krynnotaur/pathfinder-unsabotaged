@@ -20,8 +20,8 @@ class Route extends AbstractRestController {
     /**
      * ids for hub systems
      */
-    const THERA_ID  = '31000005';
-    const TURNUR_ID = '30002086';
+    const THERA_ID  = 31000005;
+    const TURNUR_ID = 30002086;
 
     /**
      * route search depth
