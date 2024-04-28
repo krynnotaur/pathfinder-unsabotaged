@@ -260,9 +260,6 @@ define([
                         render: {
                             display: (cellData, type, rowData, meta) => {
                                 if(cellData){
-                                    console.log(cellData);
-                                    console.log(BaseModule.Util.getObjVal(Init, `wormholes`));
-                                    console.log('next');
                                     let wormholeData = BaseModule.Util.getObjVal(Init, `wormholes.${cellData}`);
                                     let security = BaseModule.Util.getObjVal(wormholeData, `security`);
                                     let typeNodes = FormElement.formatSignatureTypeSelectionData({text: `${cellData} - ${security}`}, undefined, {showWhSizeLabel: false});
