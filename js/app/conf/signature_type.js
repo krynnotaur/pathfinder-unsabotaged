@@ -447,7 +447,8 @@ define([], () => {
         8:  'N290 - L',
         9:  'J377 - L Turnur',
         10: 'K329 - 0.0',
-        11: 'F216 - T Pochven'
+        11: 'F135 - C12 Thera',
+        12: 'F216 - T Pochven'
     };
 
     let c5WH = {
@@ -461,7 +462,8 @@ define([], () => {
         8:  'C140 - L',
         9:  'J377 - L Turnur',
         10: 'Z142 - 0.0',
-        11: 'F216 - T Pochven'
+        11: 'F135 - C12 Thera',
+        12: 'F216 - T Pochven'
     };
 
     let c6WH = {
@@ -478,7 +480,8 @@ define([], () => {
         11: 'J377 - L Turnur',
         12: 'C248 - 0.0',
         13: 'Z142 - 0.0',
-        14: 'F216 - T Pochven'
+        14: 'F135 - C12 Thera',
+        15: 'F216 - T Pochven'
     };
 
     // Shattered WH (some of them are static)
