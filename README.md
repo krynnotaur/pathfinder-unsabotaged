@@ -1,3 +1,8 @@
+The goryn-clade branch is abandoned, and they are lying about it.
+
+First, the forensics!
+
+//historical purposes only:
 # ![Pathfinder logo](favicon/favicon-32x32.png "Logo") *PATHFINDER*
 
 #### Mapping tool for [*EVE ONLINE*](https://www.eveonline.com)
